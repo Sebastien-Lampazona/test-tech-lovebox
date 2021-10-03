@@ -1,6 +1,12 @@
+type File {
+  filename: String!
+  mimetype: String!
+  encoding: String!
+}
+
 type Message {
-  image: String!
-  message: String!,
+  image: File!
+  message: String!
   created_at: Date!
 }
 
@@ -10,5 +16,5 @@ extend type Query {
 }
 
 extend type Mutation {
-  post(image: String!, message: String!): Message
+  post(image: Upload!, message: String!): Message
 }

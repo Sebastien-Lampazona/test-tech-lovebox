@@ -1,11 +1,6 @@
-import { server } from './server';
+import startApolloServer from './server';
 
-server.listen(4000, process.env.HOST).then(({ url }) => {
-  consola.ready({
-    message: `🚀 Server ready at ${url}`,
-    badge: true,
-  });
-});
+startApolloServer();
 
 if (module.hot) {
   module.hot.accept();
