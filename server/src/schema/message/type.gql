@@ -1,0 +1,14 @@
+type Message {
+  image: String!
+  message: String!,
+  created_at: Date!
+}
+
+extend type Query {
+  messages: [Message]
+  message(email: EmailAddress!): User
+}
+
+extend type Mutation {
+  post(image: String!, message: String!): Message
+}
