@@ -1,4 +1,4 @@
-export * from "./welcome/welcome-screen"
-export * from "./demo/demo-screen"
-export * from "./demo/demo-list-screen"
+export * from "./loveboxMessages/tab-view"
+export * from "./loveboxMessages/send-message-tab"
+export * from "./loveboxMessages/messages-list-tab"
 // export other screens here

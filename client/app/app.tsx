@@ -15,6 +15,7 @@ import React, { useState, useEffect, useRef } from "react"
 import { NavigationContainerRef } from "@react-navigation/native"
 import { SafeAreaProvider, initialWindowMetrics } from "react-native-safe-area-context"
 import { initFonts } from "./theme/fonts" // expo
+import { createUploadLink } from 'apollo-upload-client';
 import * as storage from "./utils/storage"
 import {
   useBackButtonHandler,
@@ -23,6 +24,7 @@ import {
   setRootNavigation,
   useNavigationPersistence,
 } from "./navigators"
+import Config from "react-native-config";
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { RootStore, RootStoreProvider, setupRootStore } from "./models"
 import { ToggleStorybook } from "../storybook/toggle-storybook"
@@ -46,9 +48,11 @@ function App() {
   useEffect(() => {
     // Initialize Apollo Client
     const apolloClient = new ApolloClient({
-      uri: 'http://localhost:4000',
+      uri: Config.API_URL,
+      link: createUploadLink({ uri: Config.API_URL }),
       cache: new InMemoryCache()
     });
+    console.log("Config", Config);
     setClient(apolloClient);
   }, []);
 
@@ -61,7 +65,7 @@ function App() {
 
   // Kick off initial async loading actions, like loading fonts and RootStore
   useEffect(() => {
-    ;(async () => {
+    ; (async () => {
       await initFonts() // expo
       setupRootStore().then(setRootStore)
     })()
